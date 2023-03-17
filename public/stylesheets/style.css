@@ -1,11 +1,23 @@
 body {
   padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
 }
 
 a {
   color: #00b7ff;
+  text-decoration: none;
 }
+
+a:hover {
+  color: #007bff;
+}
+
 .drone-container {
   display: flex;
   flex-wrap: wrap;
@@ -21,6 +33,12 @@ a {
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.drone-card:hover {
+  transform: translateY(-10px);
 }
 
 .drone-specs {
@@ -29,7 +47,56 @@ a {
   padding: 0.25rem 0.5rem;
 }
 
-.back-btn {
+.back-btn,
+.edit-drone-btn,
+.create-drone-btn,
+button[type="submit"] {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 1rem;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"] {
+  background-color: #28a745;
+}
+
+.back-btn:hover,
+.edit-drone-btn:hover,
+.create-drone-btn:hover,
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+input[type="text"],
+input[type="number"] {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+/* .back-btn {
   display: block;
   margin-top: 2rem;
   text-align: center;
@@ -38,7 +105,7 @@ a {
   padding: 0.5rem 1rem;
   border-radius: 5px;
   text-decoration: none;
-}
+} */
 
 .drone1 {
   background-image: url('https://cdn-global-hk.hobbyking.com/media/catalog/product/cache/4/image/660x415/17f82f742ffe127f42dca9de82fb58b1/legacy/catalog/52863.jpg');
