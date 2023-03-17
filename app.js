@@ -12,11 +12,17 @@ const express = require('express');
 // Handles the handlebars
 // https://www.npmjs.com/package/hbs
 const hbs = require('hbs');
+const path = require('path');
 
 const app = express();
 
-// ℹ️ This function is getting exported from the config folder. It runs most middlewares
-require('./config')(app);
+// Middleware
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+
+// Set view engine
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
 
 // default value for title local
 const projectName = 'lab-express-drones';
@@ -28,8 +34,9 @@ app.locals.title = `${capitalized(projectName)}- Generated with Ironlauncher`;
 const index = require('./routes/index');
 app.use('/', index);
 
-const droneRoutes = require('./routes/drones')
-app.use('/', droneRoutes)
+
+const droneRoutes = require('./routes/drones');
+app.use('/drones', droneRoutes); // Updated line
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);
