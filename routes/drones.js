@@ -23,16 +23,42 @@ const Drone = require('../models/Drone.model');
   });
  
 
+// Update the drone
+  router.get('/:id/edit', (req, res, next) => {
+    Drone.findById(req.params.id)
+      .then(drone => {
+        res.render('drones/update-form', { drone });
+      })
+      .catch(error => {
+        console.log('Error finding drone to edit', error);
+        next(error);
+      });
+  });
+  router.post('/:id/edit', (req, res, next) => {
+    const { name, propellers, maxSpeed } = req.body;
+    Drone.findByIdAndUpdate(req.params.id, { name, propellers, maxSpeed }, { new: true, runValidators: true })
+      .then(() => {
+        res.redirect('/drones');
+      })
+      .catch(error => {
+        console.log('Error updating drone', error);
+        res.render('drones/update-form', { drone: { _id: req.params.id, name, propellers, maxSpeed } });
+      });
+  });
+  
 
-router.get('/:id/edit', (req, res, next) => {
-  // Iteration #4: Update the drone
-  // ... your code here
-});
-
-router.post('/:id/delete', (req, res, next) => {
-  // Iteration #5: Delete the drone
-  // ... your code here
-});
+  router.post('/:id/delete', (req, res, next) => {
+    // Iteration #5: Delete the drone
+    Drone.findByIdAndDelete(req.params.id)
+      .then(() => {
+        res.redirect('/drones');
+      })
+      .catch(error => {
+        console.log('Error deleting drone', error);
+        next(error);
+      });
+  });
+  
 
 router.get('/', (req, res, next) => { 
   console.log('Getting drones');
